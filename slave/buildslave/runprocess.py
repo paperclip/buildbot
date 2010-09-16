@@ -2,6 +2,9 @@
 Support for running 'shell commands'
 """
 
+## DLCL: Python 2.2 for yield
+from __future__ import generators
+
 import os
 import sys
 import signal

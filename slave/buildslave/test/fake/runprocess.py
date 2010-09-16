@@ -50,7 +50,6 @@ class FakeRunProcess:
     Note that this handles sendStderr/sendStdout and keepStderr/keepStdout properly.
     """
 
-    @classmethod
     def expect(cls, *expectations):
         """
         Set the expectations for this test run
@@ -58,8 +57,8 @@ class FakeRunProcess:
         cls._expectations = list(expectations)
         # list the first expectation last, so we can pop it
         cls._expectations.reverse()
+    expect = classmethod(expect)
 
-    @classmethod
     def test_done(cls):
         """
         Indicate that this test is finished; if any expected instantiations
@@ -68,6 +67,7 @@ class FakeRunProcess:
         if cls._expectations:
             raise AssertionError("%d expected instances not created" % len(cls._expectations))
         del cls._expectations
+    test_done = classmethod(test_done)
 
     def __init__(self, builder, command, workdir, **kwargs):
         kwargs['command'] = command

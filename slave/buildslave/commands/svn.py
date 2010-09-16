@@ -117,7 +117,7 @@ class SVN(SourceBaseCommand):
         return self._dovccmd('status', args, keepStdout=True, sendStdout=False,
                              cb=self._purgeAndUpdate2)
 
-    @staticmethod
+    # @staticmethod
     def getUnversionedFiles(stdout, keep_on_purge):
         """Delete everything that shown up on status."""
         result_xml = parseString(stdout)
@@ -131,6 +131,7 @@ class SVN(SourceBaseCommand):
             if filename in keep_on_purge:
                 continue
             yield filename
+    getUnversionedFiles = staticmethod(getUnversionedFiles)
 
     def _purgeAndUpdate2(self, res):
         for filename in self.getUnversionedFiles(self.command.stdout, self.keep_on_purge):

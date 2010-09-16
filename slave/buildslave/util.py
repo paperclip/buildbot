@@ -38,14 +38,15 @@ class Obfuscated:
                     other.real == self.real and \
                     other.fake == self.fake
 
-    @staticmethod
+    # @staticmethod
     def to_text(s):
         if isinstance(s, (str, unicode)):
             return s
         else:
             return str(s)
+    to_text = staticmethod(to_text)
 
-    @staticmethod
+    # @staticmethod
     def get_real(command):
         rv = command
         if type(command) == types.ListType:
@@ -56,8 +57,9 @@ class Obfuscated:
                 else:
                     rv.append(Obfuscated.to_text(elt))
         return rv
+    get_real = staticmethod(get_real)
 
-    @staticmethod
+    # @staticmethod
     def get_fake(command):
         rv = command
         if type(command) == types.ListType:
@@ -68,4 +70,5 @@ class Obfuscated:
                 else:
                     rv.append(Obfuscated.to_text(elt))
         return rv
+    get_fake = staticmethod(get_fake)
 
